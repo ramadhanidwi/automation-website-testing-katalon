@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Login Success using correct user name and password</description>
+   <name>Login-P-1</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>73c472a6-8366-453f-aa7a-3d94f1f8ae43</testCaseGuid>
+</TestCaseEntity>

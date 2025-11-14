@@ -6,12 +6,12 @@
    <UUID>c0c09bee-b530-4a70-b311-5b4ca91b4f25</UUID>
    <createdEdition>FREE</createdEdition>
    <createdVersion>10.0.1</createdVersion>
-   <freeLicense>true</freeLicense>
+   <freeLicense>false</freeLicense>
    <migratedVersion>5.9.0</migratedVersion>
    <modifiedEdition>FREE</modifiedEdition>
-   <modifiedVersion>10.0.1</modifiedVersion>
+   <modifiedVersion>10.4.1</modifiedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
-   <projectFileLocation>C:\Ramadhani\pribadi\portofolio\katalon-studio\automation-website-testing\automation-website-testing.prj</projectFileLocation>
+   <projectFileLocation>C:\Ramadhani\pribadi\portofolio\automation-website-testing-katalon\automation-website-testing.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>

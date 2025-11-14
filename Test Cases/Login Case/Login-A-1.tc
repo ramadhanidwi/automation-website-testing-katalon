@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Login Failed, password box not filled</description>
+   <name>Login-A-1</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>e9f44352-cdd2-4ad6-b4e5-4b336f034479</testCaseGuid>
+</TestCaseEntity>

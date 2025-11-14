@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Login Failed, password not valid</description>
+   <name>Login-N-2</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>87b1a292-2927-414c-8ef3-28239e57c5c2</testCaseGuid>
+</TestCaseEntity>
