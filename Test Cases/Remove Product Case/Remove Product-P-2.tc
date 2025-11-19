@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Success remoce product through product page button</description>
+   <name>Remove Product-P-2</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>e6d91765-1c85-4a85-b4e2-723dc213867e</testCaseGuid>
+</TestCaseEntity>

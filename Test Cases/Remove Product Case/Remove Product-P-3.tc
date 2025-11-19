@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Success remove product through cart page button</description>
+   <name>Remove Product-P-3</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>5eea0d1f-c36b-493a-ac97-dd857bc33a05</testCaseGuid>
+</TestCaseEntity>

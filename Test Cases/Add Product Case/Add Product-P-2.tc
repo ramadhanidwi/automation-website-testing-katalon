@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Success add one or more product to cart through Home Page Button</description>
+   <name>Add Product-P-2</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>e2f90791-eba5-4476-8bef-c12d7fe787f9</testCaseGuid>
+</TestCaseEntity>
