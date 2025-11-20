@@ -8,5 +8,13 @@
       <description></description>
       <initValue>'https://www.saucedemo.com/'</initValue>
       <name>url</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>['Sauce Labs Bike Light', 'Sauce Labs Backpack']</initValue>
+      <name>productsToAdd</name>
+      <protected>false</protected>
    </GlobalVariableEntity>
 </GlobalVariableEntities>
