@@ -17,3 +17,23 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+WebUI.callTestCase(findTestCase('General/Login'), [:], FailureHandling.STOP_ON_FAILURE)
+
+WebUI.click(findTestObject('Home Page/Product Button/sauceLabsBikeLightProductButton'))
+
+WebUI.click(findTestObject('Product Page/addToCartButton'), FailureHandling.STOP_ON_FAILURE)
+
+WebUI.click(findTestObject('Home Page/cartLinkButton'))
+
+WebUI.verifyElementPresent(findTestObject('Cart Page/Product Added/sauceLabsBikeLightProduct'), 0)
+
+WebUI.click(findTestObject('Cart Page/Product Added/sauceLabsBikeLightProduct'))
+
+WebUI.click(findTestObject('Product Page/removeButton'))
+
+WebUI.click(findTestObject('Home Page/cartLinkButton'))
+
+WebUI.verifyElementNotPresent(findTestObject('Cart Page/Product Added/sauceLabsBikeLightProduct'), 0)
+
+WebUI.callTestCase(findTestCase('General/Logout and Close Browser'), [:], FailureHandling.STOP_ON_FAILURE)
+
