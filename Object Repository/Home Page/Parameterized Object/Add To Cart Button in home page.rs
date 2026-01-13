@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Option Button</name>
+   <name>Add To Cart Button in home page</name>
    <tag></tag>
-   <elementGuidId>b66bf595-c3f4-4446-8697-31c27a454b06</elementGuidId>
+   <elementGuidId>65363d3b-ec18-433c-9180-ae78ffaf8e6a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//button[@id='react-burger-menu-btn']</value>
+         <value>//div[contains(@class,'inventory_item')][.//div[contains(@class,'inventory_item_name') and normalize-space(.)='${productName}']]//button[normalize-space(.)='Add to cart']</value>
       </entry>
       <entry>
          <key>BASIC</key>
+         <value></value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

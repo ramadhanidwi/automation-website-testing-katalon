@@ -17,4 +17,10 @@
       <name>productsToAdd</name>
       <protected>false</protected>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>['Sauce Labs Bike Light', 'Sauce Labs Backpack']</initValue>
+      <name>input_products</name>
+      <protected>false</protected>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

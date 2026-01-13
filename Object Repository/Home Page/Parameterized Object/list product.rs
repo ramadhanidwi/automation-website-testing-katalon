@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>Option Button</name>
+   <name>list product</name>
    <tag></tag>
-   <elementGuidId>b66bf595-c3f4-4446-8697-31c27a454b06</elementGuidId>
+   <elementGuidId>9cc8641c-327b-48eb-99eb-c1e428b4a9c7</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//button[@id='react-burger-menu-btn']</value>
+         <value>(//div[@class='inventory_item_name '])</value>
       </entry>
       <entry>
          <key>BASIC</key>
+         <value></value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

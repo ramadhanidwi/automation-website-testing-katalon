@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Add Product P-2 parameterized</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>4489ff3c-ffff-49c2-84c5-692bb06736ea</testCaseGuid>
+</TestCaseEntity>

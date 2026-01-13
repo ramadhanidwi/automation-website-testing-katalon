@@ -19,7 +19,7 @@ import org.openqa.selenium.Keys as Keys
 
 WebUI.click(findTestObject('Logout/Option Button'))
 
-WebUI.click(findTestObject('Logout/Option Button'))
+WebUI.click(findTestObject('Logout/Logout Button'))
 
 WebUI.closeBrowser()
 

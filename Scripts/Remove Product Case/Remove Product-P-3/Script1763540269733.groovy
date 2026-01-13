@@ -38,4 +38,3 @@ WebUI.verifyElementNotPresent(findTestObject('Cart Page/Product Added/sauceLabsB
 WebUI.verifyElementNotPresent(findTestObject('Cart Page/Remove Button/sauceLabsBikeLightRemoveButton'), 0)
 
 WebUI.callTestCase(findTestCase('General/Logout and Close Browser'), [:], FailureHandling.STOP_ON_FAILURE)
-
