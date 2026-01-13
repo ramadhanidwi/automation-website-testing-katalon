@@ -25,43 +25,59 @@ import com.kms.katalon.core.testobject.ConditionType
 
 WebUI.callTestCase(findTestCase('General/Login'), [:], FailureHandling.STOP_ON_FAILURE)
 
-//TestObject popupButton = new TestObject('popupButton')
-//popupButton.addProperty('xpath', ConditionType.EQUALS, "//button[text()='OK']")
-//WebUI.waitForElementVisible(popupButton, 10)
-//WebUI.click(popupButton)
-
-String [] productsToAdd = ['Sauce Labs Bike Light', 'Sauce Labs Bolt T-Shirt']
-// Susun XPath pakai String.format (pastikan escape kutip jika perlu)
-
-
-//TestObject btnAddToCart = new TestObject('dynamic_AddToCart_' + productName)
-//btnAddToCart.addProperty('xpath', ConditionType.EQUALS, addProductButton)
+String [] productsToAdd = GlobalVariable.productsToAdd
 
 
 // 1) Buat TestObject dinamis dengan XPath yang sama
 TestObject listProductTO = new TestObject('listProduct')
 listProductTO.addProperty('xpath', ConditionType.EQUALS, "(//div[@class='inventory_item_name '])")
+TestObject listProductInCart = new TestObject('listProductInCart')
+listProductInCart.addProperty('xpath', ConditionType.EQUALS, "Object Repository/Cart Page/List Product In Cart")
 
 
 // 2) Ambil semua WebElement yang cocok (timeout 10 detik)
 List<WebElement> listOfProducts = WebUiCommonHelper.findWebElements(listProductTO, 10)
+List<WebElement> listOfProductsInCart = WebUiCommonHelper.findWebElements(listProductInCart, 10)
 
 for (String products : productsToAdd) {
 	String addProductButton = String.format(
 		"//div[contains(@class,'inventory_item')]" +
 		"[.//div[contains(@class,'inventory_item_name') and normalize-space(.)='%s']]" +
 		"//button[normalize-space(.)='Add to cart']",
-		products
-	)
+		products)
+	Boolean found = false
 	for(int i =0; i < listOfProducts.size(); i++) {
 		WebElement el = listOfProducts.get(i)
 		String name = el.getText()
 		WebUI.comment("Produk ke-${i+1}: ${name}")
-		if(el.getText()== products){
+		if(el.getText().equals(products)){
 			TestObject btnAddToCart = new TestObject('dynamic_AddToCart_' + products)
 			btnAddToCart.addProperty('xpath', ConditionType.EQUALS, addProductButton)
 			WebUI.click(btnAddToCart)
+			found = true
 		}
+	}
+	if(!found) {
+		System.out.println("Data ", products, " Tidak Ditemukan!")
+	}
+}
+
+WebUI.click(findTestObject('Object Repository/Home Page/cartLinkButton'))
+
+WebUI.delay(10)
+Boolean found = false
+for(String products : productsToAdd) {
+	for(int i; i < listOfProductsInCart; i++) {
+		WebElement productInCart = listOfProductsInCart.get(i)
+		String nameProductInCart = productInCart.getText()
+		if(name.equals(products)) {
+			found = true
+			return true
+		}
+	}
+	if(!found) {
+		System.out.println("Data ", products, " Tidak Ditemukan!")
+		return false
 	}
 }
 

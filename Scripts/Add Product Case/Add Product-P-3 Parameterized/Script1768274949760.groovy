@@ -16,20 +16,40 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.WebElement
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.webui.common.WebUiCommonHelper
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.testobject.ConditionType
 
 WebUI.callTestCase(findTestCase('General/Login'), [:], FailureHandling.STOP_ON_FAILURE)
 
-WebUI.click(findTestObject('Home Page/Add to Cart Button/button_9.99_add-to-cart-sauce-labs-bike-light'))
+String [] productsToAdd = GlobalVariable.productsToAdd
 
-WebUI.click(findTestObject('Home Page/Add to Cart Button/button_7.99_add-to-cart-sauce-labs-onesie'))
+// 1) Buat TestObject dinamis dengan Xpath yang sama 
+TestObject listProductTo = new TestObject('listProduct')
+listProductTo.addProperty("xpath", ConditionType.EQUALS, "(//div[@class='inventory_item_name '])")
 
-WebUI.click(findTestObject('Home Page/cartLinkButton'))
+// 2) Ambil semua WebElement yang cocok (timeout 10 detik) 
+List<WebElement> listOfProducts = WebUiCommonHelper.findWebElements(listProductTo, 10)
 
-WebUI.verifyElementPresent(findTestObject('Cart Page/Product Added/sauceLabsBikeLightProduct'), 0)
-
-WebUI.verifyElementPresent(findTestObject('Cart Page/Product Added/sauceLabsOnesieProduct'), 0)
-
-WebUI.acceptAlert()
+for(String products : productsToAdd) {
+	Boolean found = false
+	for(int i=0; i < listOfProducts.size(); i++) {
+		 WebElement nameProduct = listOfProducts.get(i)
+		 String name = nameProduct.getText()
+		 if(name == products) {
+			 nameProduct.click()
+			 WebUI.click(findTestObject('Product Page/addToCartButton'))
+			 WebUI.click(findTestObject('Product Page/backToBerandaButton'))
+			 found = true
+			 break
+		 }
+	}
+	if(!found) {
+		System.out.println("Data ", products, " Tidak Ditemukan!")
+	}
+}
 
 WebUI.callTestCase(findTestCase('General/Logout and Close Browser'), [:], FailureHandling.STOP_ON_FAILURE)
 
