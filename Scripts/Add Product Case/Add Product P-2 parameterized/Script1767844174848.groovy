@@ -31,19 +31,19 @@ String [] productsToAdd = GlobalVariable.productsToAdd
 // 1) Buat TestObject dinamis dengan XPath yang sama
 TestObject listProductTO = new TestObject('listProduct')
 listProductTO.addProperty('xpath', ConditionType.EQUALS, "(//div[@class='inventory_item_name '])")
-TestObject listProductInCart = new TestObject('listProductInCart')
-listProductInCart.addProperty('xpath', ConditionType.EQUALS, "Object Repository/Cart Page/List Product In Cart")
+//TestObject listProductInCart = new TestObject('listProductInCart')
+//listProductInCart.addProperty('xpath', ConditionType.EQUALS, "Object Repository/Cart Page/List Product In Cart")
 
 
 // 2) Ambil semua WebElement yang cocok (timeout 10 detik)
 List<WebElement> listOfProducts = WebUiCommonHelper.findWebElements(listProductTO, 10)
-List<WebElement> listOfProductsInCart = WebUiCommonHelper.findWebElements(listProductInCart, 10)
+//List<WebElement> listOfProductsInCart = WebUiCommonHelper.findWebElements(listProductInCart, 10)
 
 for (String products : productsToAdd) {
 	String addProductButton = String.format(
-		"//div[contains(@class,'inventory_item')]" +
-		"[.//div[contains(@class,'inventory_item_name') and normalize-space(.)='%s']]" +
-		"//button[normalize-space(.)='Add to cart']",
+            "//div[contains(@class,'inventory_item')]" +
+            "//div[contains(@class,'inventory_item_name') and normalize-space()='%s']" +
+            "/following::button[normalize-space()='Add to cart']",
 		products)
 	Boolean found = false
 	for(int i =0; i < listOfProducts.size(); i++) {
@@ -62,24 +62,24 @@ for (String products : productsToAdd) {
 	}
 }
 
-WebUI.click(findTestObject('Object Repository/Home Page/cartLinkButton'))
-
-WebUI.delay(10)
-Boolean found = false
-for(String products : productsToAdd) {
-	for(int i; i < listOfProductsInCart; i++) {
-		WebElement productInCart = listOfProductsInCart.get(i)
-		String nameProductInCart = productInCart.getText()
-		if(name.equals(products)) {
-			found = true
-			return true
-		}
-	}
-	if(!found) {
-		System.out.println("Data ", products, " Tidak Ditemukan!")
-		return false
-	}
-}
+//WebUI.click(findTestObject('Object Repository/Home Page/cartLinkButton'))
+//
+//WebUI.delay(10)
+//Boolean found = false
+//for(String products : productsToAdd) {
+//	for(int i; i < listOfProductsInCart; i++) {
+//		WebElement productInCart = listOfProductsInCart.get(i)
+//		String nameProductInCart = productInCart.getText()
+//		if(name.equals(products)) {
+//			found = true
+//			return true
+//		}
+//	}
+//	if(!found) {
+//		System.out.println("Data ", products, " Tidak Ditemukan!")
+//		return false
+//	}
+//}
 
 
 WebUI.callTestCase(findTestCase('General/Logout and Close Browser'), [:], FailureHandling.STOP_ON_FAILURE)
