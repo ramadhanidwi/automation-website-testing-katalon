@@ -67,22 +67,63 @@ class Home_Page {
 
         return WebUiCommonHelper.findWebElements(listProductTO, 10);
     }
+	
+	public getAddToCartButton(String productName) {
+				String xpath = String.format(
+					"//div[contains(@class,'inventory_item')]" +
+					"//div[contains(@class,'inventory_item_name') and normalize-space()='%s']" +
+					"/following::button[normalize-space()='Add to cart']",
+					productName
+				)
+				return xpath
+	}
+	
+
+	public removeProductButton(String productName) {
+		String xpath = String.format("//div[contains(@class,'inventory_item')]" +
+					"//div[contains(@class,'inventory_item_name') and normalize-space()='%s']" +
+					"/following::button[normalize-space()='Remove']",
+					productName)
+	}
 
 
 	@Keyword
 	def addProductOnHomePage(productsToAdd) {
-		List<WebElement> listOfProducts = getListOfProducts()
+		Boolean found = false
 		for (String products : productsToAdd) {
-			Boolean found = false
+			List<WebElement> listOfProducts = getListOfProducts()
 			for(int i =0; i < listOfProducts.size(); i++) {
 				WebElement el = listOfProducts.get(i)
 				String name = el.getText()
-				if(el.getText().equals(products)){
-					TestObject btnAddToCart = new TestObject('dynamic_AddToCart_' + products)
-					btnAddToCart.addProperty('xpath', ConditionType.EQUALS, getAddToCartButton(productsToAdd))
+				if(name.equals(products)){
+					TestObject btnAddToCart = new TestObject(products)
+					btnAddToCart.addProperty('xpath', ConditionType.EQUALS, getAddToCartButton(products))
 					WebUI.click(btnAddToCart)
 					found = true
+					break
 				}
+			}
+			if(!found) {
+				System.out.println("Data ", products, " Tidak Ditemukan!")
+			}
+		}}
+	
+	
+	@Keyword
+	def removeProductOnHomePage(productsToAdd) {
+		List<WebElement> lisftOfProducts = getListOfProducts()
+		for(String products : productsToAdd) {
+			Boolean found = false 
+			for(int i=0; i< listOfProducts.size(); i++) {
+				WebElement el = lisftOfProducts.get(i)
+				String name = el.getText()
+				if(el.getText().equals(products)) {
+					TestObject btnRemove = new TestObject(products)
+					btnRemove.addProperty('xpath', ConditionType.EQUALS, removeProductButton(products))
+					WebUI.click(btnRemove)
+					fond = true
+					break
+				}	
 			}
 			if(!found) {
 				System.out.println("Data ", products, " Tidak Ditemukan!")
@@ -90,19 +131,10 @@ class Home_Page {
 		}
 	}
 	
-    private TestObject getAddToCartButton(String productName) {
-
-        String xpath = String.format(
-            "//div[contains(@class,'inventory_item')]" +
-            "//div[contains(@class,'inventory_item_name') and normalize-space()='%s']" +
-            "/following::button[normalize-space()='Add to cart']",
-            productName
-        )
-
-        TestObject addProductsButton = new TestObject("btnAddToCart_" + productName)
-        addProductsButton.addProperty("xpath", ConditionType.EQUALS, xpath)
-        return addProductsButton
-    }
+	@Keyword
+	public goToCartPage() {
+		WebUI.click(findTestObject("Object Repository/Home Page/cartLinkButton"))
+	}
 
 	/**
 	 * Click element

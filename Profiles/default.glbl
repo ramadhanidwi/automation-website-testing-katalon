@@ -19,9 +19,8 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Sauce Labs Onesie'</initValue>
+      <initValue>['Sauce Labs Bolt T-Shirt']</initValue>
       <name>productToAdd</name>
       <protected>false</protected>
-      <valueType>STRING</valueType>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

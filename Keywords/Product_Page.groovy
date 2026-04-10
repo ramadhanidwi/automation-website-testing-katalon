@@ -18,65 +18,96 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
 
 import internal.GlobalVariable
-
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.By
-
 import com.kms.katalon.core.mobile.keyword.internal.MobileDriverFactory
 import com.kms.katalon.core.webui.driver.DriverFactory
-
 import com.kms.katalon.core.testobject.RequestObject
 import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObjectProperty
-
 import com.kms.katalon.core.mobile.helper.MobileElementCommonHelper
 import com.kms.katalon.core.util.KeywordUtil
-
+import com.kms.katalon.core.webui.common.WebUiCommonHelper
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 
 class Product_Page {
-	/**
-	 * Refresh browser
-	 */
-	@Keyword
-	def refreshBrowser() {
-		KeywordUtil.logInfo("Refreshing")
-		WebDriver webDriver = DriverFactory.getWebDriver()
-		webDriver.navigate().refresh()
-		KeywordUtil.markPassed("Refresh successfully")
-	}
+	public List<WebElement> getListOfProducts() {
+		TestObject listProductTO = new TestObject("listProduct");
+		listProductTO.addProperty(
+			"xpath",
+			ConditionType.EQUALS,
+			"//div[@class='inventory_item_name ']"
+		);
 
-	/**
-	 * Click element
-	 * @param to Katalon test object
-	 */
+		return WebUiCommonHelper.findWebElements(listProductTO, 10);
+	}
+	
+	public getProductCart(String productName) {
+		String xpath = String.format("//div[contains(@class,'inventory_item')]" +
+			"//div[contains(@class,'inventory_item_name') and normalize-space()='%s']",
+			productName)
+		return xpath
+	}
+	
+//	public getAddToCartButton(String productName) {
+//		String xpath = String.format(
+//			"//div[contains(@class,'inventory_item')]" +
+//			"//div[contains(@class,'inventory_item_name') and normalize-space()='%s']" +
+//			"/following::button[normalize-space()='Add to cart']",
+//			productName
+//		)
+//		return xpath
+//}
+	
 	@Keyword
-	def clickElement(TestObject to) {
-		try {
-			WebElement element = WebUiBuiltInKeywords.findWebElement(to);
-			KeywordUtil.logInfo("Clicking element")
-			element.click()
-			KeywordUtil.markPassed("Element has been clicked")
-		} catch (WebElementNotFoundException e) {
-			KeywordUtil.markFailed("Element not found")
-		} catch (Exception e) {
-			KeywordUtil.markFailed("Fail to click on element")
+	def addProductOnProductPage(productsToAdd) {
+		Boolean found = false
+		for(String products : productsToAdd) {
+			List<WebElement> listOfProducts = getListOfProducts()
+			for(int i = 0; i< listOfProducts.size(); i++) {
+				WebElement el = listOfProducts.get(i)
+				String name = el.getText()
+				if(name.equalsIgnoreCase(products)) {
+					TestObject btnProduct = new TestObject(products)
+					btnProduct.addProperty('xpath',ConditionType.EQUALS, getProductCart(products))
+					WebUI.click(btnProduct)
+					WebUI.click(findTestObject("Object Repository/Product Page/addToCartButton"))
+					WebUI.click(findTestObject("Object Repository/Product Page/backToBerandaButton"))
+					found = true
+					break
+				}
+			}
+			if(!found) {
+				System.out.println("Data ", products, " Tidak Ditemukan!")
+			}
 		}
 	}
-
-	/**
-	 * Get all rows of HTML table
-	 * @param table Katalon test object represent for HTML table
-	 * @param outerTagName outer tag name of TR tag, usually is TBODY
-	 * @return All rows inside HTML table
-	 */
+	
 	@Keyword
-	def List<WebElement> getHtmlTableRows(TestObject table, String outerTagName) {
-		WebElement mailList = WebUiBuiltInKeywords.findWebElement(table)
-		List<WebElement> selectedRows = mailList.findElements(By.xpath("./" + outerTagName + "/tr"))
-		return selectedRows
+	def removeProductOnProductPage(productsToAdd) {
+		Boolean found = false
+		for(String products : productsToAdd) {
+			List<WebElement> listOfProducts = getListOfProducts()
+			for(int i = 0; i< listOfProducts.size(); i++) {
+				WebElement el = listOfProducts.get(i)
+				String name = el.getText()
+				if(name.equalsIgnoreCase(products)) {
+					TestObject btnProduct = new TestObject(products)
+					btnProduct.addProperty('xpath',ConditionType.EQUALS, getProductCart(products))
+					WebUI.click(btnProduct)
+					WebUI.click(findTestObject("Object Repository/Product Page/removeButton"))
+					WebUI.click(findTestObject("Object Repository/Product Page/backToBerandaButton"))
+					found = true
+					break
+				}
+			}
+			if(!found) {
+				System.out.println("Data ", products, " Tidak Ditemukan!")
+			}
+		}
 	}
 }
